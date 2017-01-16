@@ -1,0 +1,38 @@
+<div ng-if="user.status">
+    <div>
+        <button ng-click="game.new()">novo jogo</button>
+    </div>
+    <div ng-if="!game.status">
+        <ul>
+            <li ng-repeat="item in game.list">
+                <button ng-click="game.remove(item)" ng-if="item.user == user.data.name">x</button>
+                <button ng-click="game.start(item)" ng-if="item.user == user.data.name">começar</button>
+                <span>Jogadores: {{item.users.length}}</span>
+                <button ng-if="!item.status && item.user != user.data.name" ng-click="game.getIn(item)">Entrar</button>
+                <p ng-if="item.status">Rolando...</p>
+            </li>
+        </ul>
+    </div>
+    <div ng-if="game.status">
+        <div>
+            {{game.cardMain.type}} {{game.cardMain.number}}
+        </div>
+        <ul class="cards">
+            <li ng-repeat="item in game.myCards" ng-click="game.makePlay(item)" ng-class="{'used': item.status}">
+                {{item.type}} {{item.number}}
+            </li>
+        </ul>
+        <strong>Mesa</strong>
+        <ul>
+            <li ng-repeat="item in game.table.round">
+                <span>{{item.name}}</span>
+                <ul>
+                    <li ng-repeat="card in item.cards">
+                        {{card.user}} - {{card.type}} {{card.number}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <span ng-if="game.table.turn">Sua vez</span>
+    </div>
+</div>

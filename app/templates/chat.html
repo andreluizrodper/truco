@@ -1,0 +1,11 @@
+<div ng-if="user.status">
+    <ul>
+        <li ng-repeat="item in chat.list">
+            <strong>{{item.user}}</strong> - {{item.msg}}
+        </li>
+    </ul>
+    <form ng-submit="chat.msg()">
+        <input type="text" ng-model="chat.form.msg" placeholder="..."/>
+        <button>+</button>
+    </form>
+</div>
